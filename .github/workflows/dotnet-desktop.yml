@@ -68,8 +68,8 @@ jobs:
     - name: Install codereport
       run: |
         cd Fractions
-        dotnet new xunit -n XUnit.Coverlet.Collector
-        dotnet new xunit -n XUnit.Coverlet.MSBuild
+        dotnet new xunit -n XUnit.Coverlet.Collector --force
+        dotnet new xunit -n XUnit.Coverlet.MSBuild --force
         dotnet add XUnit.Coverlet.Collector\XUnit.Coverlet.Collector.csproj reference math\math.csproj
         dotnet add XUnit.Coverlet.MSBuild\XUnit.Coverlet.MSBuild.csproj reference math\math.csproj
         cd XUnit.Coverlet.MSBuild 
