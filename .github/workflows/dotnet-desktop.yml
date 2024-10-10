@@ -65,3 +65,21 @@ jobs:
     # Execute all unit tests in the solution
     - name: Execute unit tests
       run: dotnet test Fractions/UnitTest.sln
+    - name: Install codereport
+      run: |
+        dotnet new xunit -n XUnit.Coverlet.Collector
+        dotnet new xunit -n XUnit.Coverlet.MSBuild
+        dotnet add XUnit.Coverlet.Collector\XUnit.Coverlet.Collector.csproj reference math\math.csproj
+        dotnet add XUnit.Coverlet.MSBuild\XUnit.Coverlet.MSBuild.csproj reference math\math.csproj
+        cd XUnit.Coverlet.MSBuild 
+        dotnet add package coverlet.msbuild
+        cd ..
+        dotnet sln XUnit.Coverage.sln add **/*.csproj --in-root
+        dotnet build
+        cd XUnit.Coverlet.Collector
+        dotnet test --collect:"XPlat Code Coverage"
+        dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+        dotnet tool install -g dotnet-reportgenerator-globaltool
+        reportgenerator -reports:"Path\To\TestProject\TestResults\{guid}\coverage.cobertura.xml" -targetdir:"coveragereport" -reporttypes:Html
+        
+        
