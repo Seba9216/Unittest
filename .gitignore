@@ -1,0 +1,6 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Fractions/coveragereport
+/Fractions/XUnit.Coverlet.Collector/TestResults/cd3d564a-dd6b-4d32-b76a-1ed9d006c511/coverage.cobertura.xml
