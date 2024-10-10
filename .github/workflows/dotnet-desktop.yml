@@ -67,6 +67,7 @@ jobs:
       run: dotnet test Fractions/UnitTest.sln
     - name: Install codereport
       run: |
+        cd Fractions
         dotnet new xunit -n XUnit.Coverlet.Collector
         dotnet new xunit -n XUnit.Coverlet.MSBuild
         dotnet add XUnit.Coverlet.Collector\XUnit.Coverlet.Collector.csproj reference math\math.csproj
