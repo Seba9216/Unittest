@@ -76,7 +76,7 @@ jobs:
         dotnet add package coverlet.msbuild
         cd ..
         dotnet sln XUnit.Coverage.sln add **/*.csproj --in-root
-        dotnet build
+        dotnet build XUnit.Coverage.sln
         cd XUnit.Coverlet.Collector
         dotnet test --collect:"XPlat Code Coverage"
         dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
