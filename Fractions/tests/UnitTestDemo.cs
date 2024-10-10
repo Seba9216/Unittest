@@ -127,4 +127,61 @@ public class DemoUnitTest
         var output = writer.ToString();
         Assert.Equal("Escape pressed 1!" + Environment.NewLine, output);
     }
+    [Fact]
+    public void TestStringDoesthrowexectption()
+    {
+        var rectangle = new Rectangle(1, 2);
+        
+        Assert.Equal("techmath.Rectangle(1,2)", rectangle.ToString()); 
+    }
+    [Fact]
+    public void TestRectanglePerimeter()
+    {
+        var rectangle = new Rectangle(1, 2);
+        Assert.Equal(6, rectangle.Perimeter()); 
+    }
+    [Fact]
+    public void TestRectangleArea() 
+    {
+        var rectangle = new Rectangle(1, 2);
+        Assert.Equal(2, rectangle.Area());
+
+
+    }
+    [Fact]
+    public void TestCirleArea()
+    {
+        var circle = new Circle(2);
+        Assert.Equal(12.566370614359172953850573533118, circle.Area());
+
+    }
+    [Fact]
+    public void TestCirlePerimeter()
+    {
+        var circle = new Circle(2);
+        Assert.Equal(12.566370614359172953850573533118, circle.Perimeter());
+    }
+    [Fact]
+    public void TestCirleTostring()
+    {
+        var circle = new Circle(2);
+        Assert.Equal("techmath.Circle(2)", circle.ToString());
+    }
+    [Fact]
+    public void TestFractionMinus()
+    {
+        var fraction1 = new Fraction(5,10);
+        var fraction2 = new Fraction(3, 10);
+        var result = fraction1.Minus(fraction2);
+        Assert.Equal(new Fraction(2, 10), result);
+    }
+    [Fact]
+    public void TestFractionMultiply()
+    {
+        var fraction1 = new Fraction(5, 10);
+        var fraction2 = new Fraction(3, 10);
+        var result = fraction1.Multiply(fraction2);
+        Assert.Equal(new Fraction(3, 20), result);
+    }
+
 }
