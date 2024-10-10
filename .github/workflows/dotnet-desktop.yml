@@ -30,11 +30,15 @@ jobs:
         dotnet tool install -g dotnet-reportgenerator-globaltool
         dotnet add Fractions/tests/tests.csproj package JunitXml.TestLogger
         dotnet test Fractions/UnitTest.sln --configuration Release --logger "junit;LogFilePath=dotnet-test-result.xml" --collect:"XPlat Code Coverage"
+        # find and print the output file
+        OUTPUT=$(find Fractions/tests/TestResults | grep xml)
+        echo "${OUTPUT}"
+        mv $OUTPUT Fractions/tests/coverage.cobertura.xml
         
     - name: Generate report
       uses: danielpalme/ReportGenerator-GitHub-Action@5.3.11
       with:
-        reports: 'Fractions/tests/dotnet-test-result.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+        reports: 'Fractions/tests/coverage.cobertura.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
         targetdir: 'coveragereport' # REQUIRED # The directory where the generated report should be saved.
         reporttypes: 'HtmlInline;Cobertura;MarkdownSummaryGithub' # The output formats and scope (separated by semicolon) Values: Badges, Clover, Cobertura, OpenCover, CsvSummary, Html, Html_Dark, Html_Light, Html_BlueRed, HtmlChart, HtmlInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlInline_AzurePipelines_Light, HtmlSummary, Html_BlueRed_Summary, JsonSummary, CodeClimate, Latex, LatexSummary, lcov, MarkdownSummary, MarkdownAssembliesSummary, MarkdownSummaryGithub, MarkdownDeltaSummary, MHtml, SvgChart, SonarQube, TeamCitySummary, TextSummary, TextDeltaSummary, Xml, XmlSummary
         sourcedirs: '' # Optional directories which contain the corresponding source code (separated by semicolon). The source directories are used if coverage report contains classes without path information.
